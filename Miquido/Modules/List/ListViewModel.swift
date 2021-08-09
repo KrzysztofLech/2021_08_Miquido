@@ -10,6 +10,7 @@ import Foundation
 protocol ListViewModelProtocol {
     var data: [Datum] { get }
     func fetchData(completion: @escaping (String?) -> ())
+    func getTextForCell(atIndex index: Int) -> String
 }
 
 class ListViewModel: ListViewModelProtocol {
@@ -31,5 +32,10 @@ class ListViewModel: ListViewModelProtocol {
                 completion(error.rawValue)
             }
         }
+    }
+    
+    func getTextForCell(atIndex index: Int) -> String {
+        let datum = data[index]
+        return String(format: "%@ %@", datum.firstName, datum.lastName)
     }
 }

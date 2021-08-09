@@ -67,4 +67,8 @@ extension RootCoordinator: ListViewControllerDelegate {
         
         navigationController?.present(alerController, animated: true)
     }
+    
+    func didSelectDatum(_ datum: Datum) {
+        print(datum.id)
+    }
 }

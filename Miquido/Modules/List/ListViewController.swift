@@ -9,6 +9,7 @@ import UIKit
 
 protocol ListViewControllerDelegate: AnyObject {
     func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
+    func didSelectDatum(_ datum: Datum)
 }
 
 final class ListViewController: UIViewController {
@@ -40,14 +41,28 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         fetchData()
+    }
+    
+    // MARK: - Setup view -
+    
+    private func setupView() {
+        title = "Endpoint data"
+        contentView.tableView.dataSource = self
+        contentView.tableView.delegate = self
+        contentView.tableView.register(ListItemTableViewCell.self, forCellReuseIdentifier: ListItemTableViewCell.className)
     }
     
     // MARK: - Data methods -
     
     private func fetchData() {
+        contentView.showActivityIndicator(true)
+        
         viewModel.fetchData { [weak self] errorText in
             DispatchQueue.main.async {
+                self?.contentView.showActivityIndicator(false)
+                
                 if let errorText = errorText {
                     self?.delegate?.showAlert(
                         title: "Data dwonloading problem!",
@@ -56,9 +71,34 @@ final class ListViewController: UIViewController {
                             self?.fetchData()
                         })
                 } else {
-                    print(self?.viewModel.data.count)
+                    self?.contentView.tableView.reloadData()
                 }
             }
         }
+    }
+}
+
+// MARK: - TableView data source methods -
+
+extension ListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = contentView.tableView.dequeueReusableCell(withIdentifier: ListItemTableViewCell.className, for: indexPath) as? ListItemTableViewCell
+        else { return UITableViewCell() }
+        let cellText = viewModel.getTextForCell(atIndex: indexPath.row)
+        cell.configure(withText: cellText)
+        return cell
+    }
+}
+
+// MARK: - TableView delegate methods -
+
+extension ListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let datum = viewModel.data[indexPath.row]
+        delegate?.didSelectDatum(datum)
     }
 }
