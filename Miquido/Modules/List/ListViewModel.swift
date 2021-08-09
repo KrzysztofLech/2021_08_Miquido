@@ -13,7 +13,7 @@ protocol ListViewModelProtocol {
     func getTextForCell(atIndex index: Int) -> String
 }
 
-class ListViewModel: ListViewModelProtocol {
+final class ListViewModel: ListViewModelProtocol {
     
     private let dataService: DataServiceProtocol
     var data: [Datum] = []

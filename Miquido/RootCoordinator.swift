@@ -47,6 +47,12 @@ final class RootCoordinator: NSObject, Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
+    
+    private func showDatumDetails(_ datum: Datum) {
+        let detailsViewModel = DetailsViewModel(dataService: dataService, datum: datum)
+        let detailsViewController = DetailsViewController(viewModel: detailsViewModel)
+        navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }
 
 // MARK: - ListViewController delegate methods -
@@ -69,6 +75,6 @@ extension RootCoordinator: ListViewControllerDelegate {
     }
     
     func didSelectDatum(_ datum: Datum) {
-        print(datum.id)
+        showDatumDetails(datum)
     }
 }
