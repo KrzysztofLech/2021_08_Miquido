@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol ListViewControllerDelegate: AnyObject {
+    func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
+}
+
 final class ListViewController: UIViewController {
+    
+    // MARK: - Public properties -
+    
+    weak var delegate: ListViewControllerDelegate?
     
     // MARK: - Private properties -
     
@@ -39,12 +47,18 @@ final class ListViewController: UIViewController {
     
     private func fetchData() {
         viewModel.fetchData { [weak self] errorText in
-            guard let errorText = errorText else {
-                print(self?.viewModel.data.count)
-                return
+            DispatchQueue.main.async {
+                if let errorText = errorText {
+                    self?.delegate?.showAlert(
+                        title: "Data dwonloading problem!",
+                        message: errorText,
+                        errorHandler: {
+                            self?.fetchData()
+                        })
+                } else {
+                    print(self?.viewModel.data.count)
+                }
             }
-            
-            print(errorText)
         }
     }
 }

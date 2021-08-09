@@ -12,6 +12,7 @@ protocol Coordinator {
 }
 
 protocol RootCoordinatorDelegate: AnyObject {
+    func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
 }
 
 final class RootCoordinator: NSObject, Coordinator {
@@ -19,6 +20,7 @@ final class RootCoordinator: NSObject, Coordinator {
     // MARK: - Properties -
     
     private var window: UIWindow?
+    private var navigationController: UINavigationController?
     
     private let dataService: DataServiceProtocol
         
@@ -38,12 +40,31 @@ final class RootCoordinator: NSObject, Coordinator {
     private func showList() {
         let listViewModel = ListViewModel(dataService: dataService)
         let listViewController = ListViewController(viewModel: listViewModel)
-        window?.rootViewController = listViewController
+        listViewController.delegate = self
+        
+        navigationController = UINavigationController(rootViewController: listViewController)
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
 
-// MARK: - Root Coordinator delegate methods -
+// MARK: - ListViewController delegate methods -
 
-extension RootCoordinator: RootCoordinatorDelegate {
+extension RootCoordinator: ListViewControllerDelegate {
+    func showAlert(title: String, message: String, errorHandler: @escaping () -> ()) {
+        let errorAction = UIAlertAction(
+            title: "Try again",
+            style: .default) { _ in
+            errorHandler()
+        }
+        
+        let alerController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        alerController.addAction(errorAction)
+        
+        navigationController?.present(alerController, animated: true)
+    }
 }
