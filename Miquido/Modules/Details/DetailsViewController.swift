@@ -41,5 +41,6 @@ final class DetailsViewController: UIViewController {
         title = "Datum details"
         contentView.setupName(viewModel.nameText)
         contentView.setupEmail(viewModel.emailText)
+        contentView.showAvatarImage(viewModel.avatarStringUrl)
     }
 }

@@ -5,16 +5,16 @@
 //  Created by KL on 09/08/2021.
 //
 
-import Foundation
+import UIKit
 
 protocol DetailsViewModelProtocol {
     var nameText: String { get }
     var emailText: String { get }
+    var avatarStringUrl: String { get }
 }
 
 final class DetailsViewModel: DetailsViewModelProtocol {
     
-    private let dataService: DataServiceProtocol
     private let datum: Datum
     
     var nameText: String {
@@ -25,8 +25,11 @@ final class DetailsViewModel: DetailsViewModelProtocol {
         return datum.email
     }
     
-    init(dataService: DataServiceProtocol, datum: Datum) {
-        self.dataService = dataService
+    var avatarStringUrl: String {
+        return datum.avatar
+    }
+    
+    init(datum: Datum) {
         self.datum = datum
     }
 }

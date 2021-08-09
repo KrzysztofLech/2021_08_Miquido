@@ -22,6 +22,8 @@ final class DetailsView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = AppColor.detailsContent?.cgColor
         
+        imageView.image = UIImage(named: "avatar")
+        
         return imageView
     }()
     
@@ -127,5 +129,9 @@ final class DetailsView: UIView {
     func setupEmail(_ emailText: String) {
         emailLabel.text = emailText
     }
+    
+    func showAvatarImage(_ avatar: String) {
+        guard let url = URL(string: avatar) else { return }
+        avatarImageView.downloadImage(withUrl: url)
+    }
 }
-

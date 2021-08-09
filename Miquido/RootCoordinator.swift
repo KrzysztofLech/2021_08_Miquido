@@ -11,10 +11,6 @@ protocol Coordinator {
     func start()
 }
 
-protocol RootCoordinatorDelegate: AnyObject {
-    func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
-}
-
 final class RootCoordinator: NSObject, Coordinator {
     
     // MARK: - Properties -
@@ -49,7 +45,7 @@ final class RootCoordinator: NSObject, Coordinator {
     }
     
     private func showDatumDetails(_ datum: Datum) {
-        let detailsViewModel = DetailsViewModel(dataService: dataService, datum: datum)
+        let detailsViewModel = DetailsViewModel(datum: datum)
         let detailsViewController = DetailsViewController(viewModel: detailsViewModel)
         navigationController?.pushViewController(detailsViewController, animated: true)
     }

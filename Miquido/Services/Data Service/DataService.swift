@@ -5,7 +5,7 @@
 //  Created by KL on 09/08/2021.
 //
 
-import Foundation
+import UIKit
 
 protocol DataServiceProtocol: AnyObject {
     func fetchData(completion: @escaping (Result<ListData, ErrorResult>) -> ())
@@ -16,6 +16,8 @@ final class DataService: DataServiceProtocol {
     private enum Constants {
         static let endpoint = "https://reqres.in/api/users"
     }
+    
+    private var downloadTask: URLSessionDownloadTask?
     
     func fetchData(completion: @escaping (Result<ListData, ErrorResult>) -> ()) {
         guard let url = URL(string: Constants.endpoint) else {

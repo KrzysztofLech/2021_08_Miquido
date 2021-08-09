@@ -49,6 +49,8 @@ final class ListViewController: UIViewController {
     
     private func setupView() {
         title = "Endpoint data"
+        navigationItem.backButtonDisplayMode = .minimal
+        
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
         contentView.tableView.register(ListItemTableViewCell.self, forCellReuseIdentifier: ListItemTableViewCell.className)

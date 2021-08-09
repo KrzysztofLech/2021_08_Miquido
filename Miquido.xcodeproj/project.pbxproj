@@ -26,6 +26,7 @@
 		6B460AB626C17AB00067BDF2 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B460AB526C17AB00067BDF2 /* AppColors.swift */; };
 		6B460AB826C17D800067BDF2 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B460AB726C17D800067BDF2 /* UIView+extensions.swift */; };
 		6B460ABA26C18DF90067BDF2 /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B460AB926C18DF90067BDF2 /* ListItemTableViewCell.swift */; };
+		6B460ABE26C1B3CA0067BDF2 /* UIImageView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B460ABD26C1B3CA0067BDF2 /* UIImageView+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		6B460AB526C17AB00067BDF2 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		6B460AB726C17D800067BDF2 /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		6B460AB926C18DF90067BDF2 /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
+		6B460ABD26C1B3CA0067BDF2 /* UIImageView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				6B460AB726C17D800067BDF2 /* UIView+extensions.swift */,
+				6B460ABD26C1B3CA0067BDF2 /* UIImageView+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				6B0B6E4C26C11CB200C87396 /* AppDelegate.swift in Sources */,
 				6B460AA826C140CE0067BDF2 /* DetailsView.swift in Sources */,
 				6B460ABA26C18DF90067BDF2 /* ListItemTableViewCell.swift in Sources */,
+				6B460ABE26C1B3CA0067BDF2 /* UIImageView+extensions.swift in Sources */,
 				6B460AA226C1409F0067BDF2 /* ListView.swift in Sources */,
 				6B460AAC26C16C080067BDF2 /* ListData.swift in Sources */,
 				6B460AB826C17D800067BDF2 /* UIView+extensions.swift in Sources */,
