@@ -6,3 +6,30 @@
 //
 
 import Foundation
+
+protocol ListViewModelProtocol {
+    var data: [Datum] { get }
+    func fetchData(completion: @escaping (String?) -> ())
+}
+
+class ListViewModel: ListViewModelProtocol {
+    
+    private let dataService: DataServiceProtocol
+    var data: [Datum] = []
+    
+    init(dataService: DataServiceProtocol) {
+        self.dataService = dataService
+    }
+    
+    func fetchData(completion: @escaping (String?) -> ()) {
+        dataService.fetchData { [weak self] response in
+            switch response {
+            case .success(let listData):
+                self?.data = listData.data
+                completion(nil)
+            case .failure(let error):
+                completion(error.rawValue)
+            }
+        }
+    }
+}

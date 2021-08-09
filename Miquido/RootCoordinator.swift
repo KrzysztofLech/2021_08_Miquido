@@ -19,11 +19,14 @@ final class RootCoordinator: NSObject, Coordinator {
     // MARK: - Properties -
     
     private var window: UIWindow?
+    
+    private let dataService: DataServiceProtocol
         
     // MARK: - Init -
     
     init(windowScene: UIWindowScene) {
         self.window = UIWindow(windowScene: windowScene)
+        self.dataService = DataService()
     }
     
     // MARK: - Module methods -
@@ -33,11 +36,11 @@ final class RootCoordinator: NSObject, Coordinator {
     }
     
     private func showList() {
-        let listViewController = ListViewController()
+        let listViewModel = ListViewModel(dataService: dataService)
+        let listViewController = ListViewController(viewModel: listViewModel)
         window?.rootViewController = listViewController
         window?.makeKeyAndVisible()
     }
-    
 }
 
 // MARK: - Root Coordinator delegate methods -
