@@ -53,7 +53,9 @@ final class ListViewController: UIViewController {
         
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
-        contentView.tableView.register(ListItemTableViewCell.self, forCellReuseIdentifier: ListItemTableViewCell.className)
+        contentView.tableView.register(
+            ListItemTableViewCell.self,
+            forCellReuseIdentifier: ListItemTableViewCell.className)
     }
     
     // MARK: - Data methods -
